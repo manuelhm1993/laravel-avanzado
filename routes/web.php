@@ -40,34 +40,6 @@ Route::prefix('categorias')->name('categorias.')->group(function () {
 });
 
 Route::prefix('productos')->name('productos.')->group(function() {
-    Route::get('/json', function () {
-        $categorias = [
-            'Verduras' => [
-                'Tomates',
-                'Lechuga',
-                'Cebolla',
-            ],
-            'Fideos' => [
-                'Tallarines',
-                'Cabello de ángel',
-                'Vermicelli',
-            ],
-        ];
-
-        $productos = [];
-
-        foreach($categorias as $categoria)
-        {
-            foreach ($categoria as $producto) 
-            {
-                $productos[] = $producto;
-            }
-        }
-
-        //Devolver los productos en formato json
-        return response()->json($productos);
-    });
-
     //Definición de parámetro nulo
     Route::get('/{categoria?}', function (?string $categoria = null) {
         $categorias = [
