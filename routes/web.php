@@ -3,8 +3,41 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+function getProductosCategoria($getCategoria = false) {
+    $categorias = [
+        'Verduras' => [
+            'Tomates',
+            'Lechuga',
+            'Cebolla',
+        ],
+        'Fideos' => [
+            'Tallarines',
+            'Cabello de ángel',
+            'Vermicelli',
+        ],
+    ];
+
+    $productos = [];
+    $dataCategorias = [];
+
+    foreach($categorias as $key => $categoria)
+    {
+        $dataCategorias[] = $key;
+
+        foreach ($categoria as $producto) 
+        {
+            $productos[] = $producto;
+        }
+    }
+
+    return ($getCategoria) ? $dataCategorias : $productos;
+}
+
 Route::get('/', function () {
-    return view('welcome');
+    $productos = getProductosCategoria();
+    $categorias = getProductosCategoria(true);
+
+    return view('home', compact('productos', 'categorias'));
 });
 
 //Agrupación de rutas con prefijos y nombres
@@ -42,43 +75,8 @@ Route::prefix('categorias')->name('categorias.')->group(function () {
 Route::prefix('productos')->name('productos.')->group(function() {
     //Definición de parámetro nulo
     Route::get('/{categoria?}', function (?string $categoria = null) {
-        $categorias = [
-            'Verduras' => [
-                'Tomates',
-                'Lechuga',
-                'Cebolla',
-            ],
-            'Fideos' => [
-                'Tallarines',
-                'Cabello de ángel',
-                'Vermicelli',
-            ],
-        ];
+        $productos = getProductosCategoria();
 
-        //Comprobar si la categoría es nula para mostrar todos los productos
-        if(is_null($categoria))
-        {
-            foreach($categorias as $categoria)
-            {
-                foreach ($categoria as $producto) 
-                {
-                    echo $producto . '<br>';
-                }
-            }
-        }
-        else
-        {
-            if(array_key_exists($categoria, $categorias))
-            {
-                foreach($categorias[$categoria] as $producto)
-                {
-                    echo $producto . '<br>';
-                }
-            }
-            else 
-            {
-                echo "La categoría {$categoria} no existe";
-            }
-        }
+        return view('productos', compact('productos'));
     });
 });
