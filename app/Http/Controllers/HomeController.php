@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Utilities\Common;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -13,9 +14,8 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $categorias = Common::getCategorias();
-        $productos = Common::getProductos();
+        $categorias = Category::all();
 
-        return view('home', compact('productos', 'categorias'));
+        return view('home', compact('categorias'));
     }
 }

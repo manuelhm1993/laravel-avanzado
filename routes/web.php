@@ -12,6 +12,8 @@ Route::get('/', HomeController::class)->name('home');
 Route::prefix('categorias')->name('categorias.')->controller(CategoryController::class)->group(function () {
     Route::get('/', 'index')->name('index');
 
+    Route::get('/create/{nombreCategoria}', 'create')->name('create');
+
     //Definición de ruta parametrizada
     Route::get('/{nombreCategoria}', 'show')->name('show');
 });

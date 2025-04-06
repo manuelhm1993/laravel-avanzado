@@ -2,41 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request): string | array
+    public function index(): View
     {
-        $categorias = [
-            'Verduras',
-            'Fideos',
-            'Arroz'
-        ];
+        $categorias = Category::all();
 
-        $param = $request->query('nombre');
-        $data = [];
-        $response = '';
-
-        //Verificar si existe un parámetro de query
-        if(!is_null($param))
-        {
-            //Verificar si el parámetro es una categoría
-            $response = in_array($param, $categorias) ? "Existe la categoría {$param}" : "No existe la categoría {$param}";
-        }
-        else 
-        {
-            foreach($categorias as $categoria)
-            {
-                $data[] = $categoria;
-            }
-        }
-
-        return (count($data) > 0) ? $data : $response;
+        return view('categorias', compact('categorias'));
     }
 
-    public function show($categoria): string
+    public function create($nombreCategoria): RedirectResponse
     {
-        return 'Productos de ' . $categoria;
+        $category = new Category();
+        $category->name = $nombreCategoria;
+        $category->save();
+
+        $categorias = Category::all();
+
+        return redirect()->route('home', compact('categorias'));
+    }
+
+    public function show($categoria): View
+    {
+        $categorias = Category::where('name', 'like', "%{$categoria}%")->get();
+
+        return view('categorias', compact('categorias'));
     }
 }

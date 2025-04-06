@@ -41,16 +41,4 @@ class Common
     
         return $response;
     }
-
-    public static function getCategorias(): array
-    {
-        $dataCategorias = [];
-    
-        foreach(self::$categorias as $key => $categoria)
-        {
-            $dataCategorias[] = $key;
-        }
-    
-        return $dataCategorias;
-    }
 }
