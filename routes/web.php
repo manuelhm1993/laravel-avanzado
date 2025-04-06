@@ -1,44 +1,12 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Utilities\Common;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-function getProductosCategoria($getCategoria = false) {
-    $categorias = [
-        'Verduras' => [
-            'Tomates',
-            'Lechuga',
-            'Cebolla',
-        ],
-        'Fideos' => [
-            'Tallarines',
-            'Cabello de ángel',
-            'Vermicelli',
-        ],
-    ];
-
-    $productos = [];
-    $dataCategorias = [];
-
-    foreach($categorias as $key => $categoria)
-    {
-        $dataCategorias[] = $key;
-
-        foreach ($categoria as $producto) 
-        {
-            $productos[] = $producto;
-        }
-    }
-
-    return ($getCategoria) ? $dataCategorias : $productos;
-}
-
-Route::get('/', function () {
-    $productos = getProductosCategoria();
-    $categorias = getProductosCategoria(true);
-
-    return view('home', compact('productos', 'categorias'));
-});
+//Llama a un controlador --invokable
+Route::get('/', HomeController::class);
 
 //Agrupación de rutas con prefijos y nombres
 Route::prefix('categorias')->name('categorias.')->group(function () {
@@ -75,7 +43,7 @@ Route::prefix('categorias')->name('categorias.')->group(function () {
 Route::prefix('productos')->name('productos.')->group(function() {
     //Definición de parámetro nulo
     Route::get('/{categoria?}', function (?string $categoria = null) {
-        $productos = getProductosCategoria();
+        $productos = Common::getProductos();
 
         return view('productos', compact('productos'));
     });
