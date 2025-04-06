@@ -39,43 +39,74 @@ Route::prefix('categorias')->name('categorias.')->group(function () {
     });
 });
 
-//Definición de parámetro nulo
-Route::get('productos/{categoria?}', function (?string $categoria = null) {
-    $categorias = [
-        'Verduras' => [
-            'Tomates',
-            'Lechuga',
-            'Cebolla',
-        ],
-        'Fideos' => [
-            'Tallarines',
-            'Cabello de ángel',
-            'Vermicelli',
-        ],
-    ];
+Route::prefix('productos')->name('productos.')->group(function() {
+    Route::get('/json', function () {
+        $categorias = [
+            'Verduras' => [
+                'Tomates',
+                'Lechuga',
+                'Cebolla',
+            ],
+            'Fideos' => [
+                'Tallarines',
+                'Cabello de ángel',
+                'Vermicelli',
+            ],
+        ];
 
-    //Comprobar si la categoría es nula para mostrar todos los productos
-    if(is_null($categoria))
-    {
+        $productos = [];
+
         foreach($categorias as $categoria)
         {
-            foreach ($categoria as $producto) {
-                echo $producto . '<br>';
-            }
-        }
-    }
-    else
-    {
-        if(array_key_exists($categoria, $categorias))
-        {
-            foreach($categorias[$categoria] as $producto)
+            foreach ($categoria as $producto) 
             {
-                echo $producto . '<br>';
+                $productos[] = $producto;
             }
         }
-        else 
+
+        //Devolver los productos en formato json
+        return response()->json($productos);
+    });
+
+    //Definición de parámetro nulo
+    Route::get('/{categoria?}', function (?string $categoria = null) {
+        $categorias = [
+            'Verduras' => [
+                'Tomates',
+                'Lechuga',
+                'Cebolla',
+            ],
+            'Fideos' => [
+                'Tallarines',
+                'Cabello de ángel',
+                'Vermicelli',
+            ],
+        ];
+
+        //Comprobar si la categoría es nula para mostrar todos los productos
+        if(is_null($categoria))
         {
-            echo "La categoría {$categoria} no existe";
+            foreach($categorias as $categoria)
+            {
+                foreach ($categoria as $producto) 
+                {
+                    echo $producto . '<br>';
+                }
+            }
         }
-    }
+        else
+        {
+            if(array_key_exists($categoria, $categorias))
+            {
+                foreach($categorias[$categoria] as $producto)
+                {
+                    echo $producto . '<br>';
+                }
+            }
+            else 
+            {
+                echo "La categoría {$categoria} no existe";
+            }
+        }
+    });
 });
