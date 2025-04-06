@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,25 +9,28 @@ Route::get('/', function () {
 
 //Agrupación de rutas con prefijos y nombres
 Route::prefix('categorias')->name('categorias.')->group(function () {
-    Route::get('/', function () {
+    Route::get('/', function (Request $request) {
         $categorias = [
             'Verduras',
             'Fideos',
             'Arroz'
         ];
-    
-        foreach($categorias as $categoria)
+
+        $param = $request->query('nombre');
+
+        //Verificar si existe un parámetro de query
+        if(!is_null($param))
         {
-            echo $categoria . '<br>';
+            //Verificar si el parámetro es una categoría
+            echo in_array($param, $categorias) ? "Existe la categoría {$param}" : "No existe la categoría {$param}";
         }
-    });
-
-    Route::get('/oferta', function () {
-        echo 'Categorías en oferta';
-    });
-
-    Route::get('/mas-vendidas', function () {
-        echo 'Categorías más vendidas';
+        else 
+        {
+            foreach($categorias as $categoria)
+            {
+                echo $categoria . '<br>';
+            }
+        }
     });
 
     //Definición de ruta parametrizada
