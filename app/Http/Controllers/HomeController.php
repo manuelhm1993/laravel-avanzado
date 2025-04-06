@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Utilities\Common;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -12,33 +13,8 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $categorias = [
-            'Verduras' => [
-                'Tomates',
-                'Lechuga',
-                'Cebolla',
-            ],
-            'Fideos' => [
-                'Tallarines',
-                'Cabello de ángel',
-                'Vermicelli',
-            ],
-        ];
-    
-        $productos = [];
-        $dataCategorias = [];
-    
-        foreach($categorias as $key => $categoria)
-        {
-            $dataCategorias[] = $key;
-    
-            foreach ($categoria as $producto) 
-            {
-                $productos[] = $producto;
-            }
-        }
-
-        $categorias = $dataCategorias;
+        $categorias = Common::getCategorias();
+        $productos = Common::getProductos();
 
         return view('home', compact('productos', 'categorias'));
     }

@@ -17,22 +17,32 @@ class Common
         ],
     ];
 
-    public static function getProductos() 
+    public static function getProductos(?string $nombreCategoria = null): array
     {
-        $productos = [];
-    
-        foreach(self::$categorias as $key => $categoria)
+        $response = [];
+
+        if(!is_null($nombreCategoria) && array_key_exists($nombreCategoria, self::$categorias))
         {
-            foreach ($categoria as $producto) 
+            foreach(self::$categorias[$nombreCategoria] as $categoria)
             {
-                $productos[] = $producto;
+                $response[] = $categoria;
+            }
+        }
+        else
+        {
+            foreach(self::$categorias as $categoria)
+            {
+                foreach ($categoria as $producto) 
+                {
+                    $response[] = $producto;
+                }
             }
         }
     
-        return $productos;
+        return $response;
     }
 
-    public static function getCategorias() 
+    public static function getCategorias(): array
     {
         $dataCategorias = [];
     
