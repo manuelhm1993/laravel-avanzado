@@ -12,8 +12,11 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $productos = Product::all();
-
+        $productos = Product::with('category')
+                        ->orderBy('category_id', 'DESC')
+                        ->orderBy('name', 'ASC')
+                        ->get();
+        
         return view('productos', compact('productos'));
     }
 
@@ -29,14 +32,17 @@ class ProductController extends Controller
         return redirect()->route('productos.index', compact('productos'));
     }
 
-    public function show(string $categoria): View
+    public function show(string $categoria)//: View
     {
         $category = Category::where('name', 'like', "%{$categoria}%")->first();
         $productos = [];
 
         if(!is_null($category))
         {
-            $productos = Product::where('category_id', $category->id)->get();
+            $productos = Product::where('category_id', $category->id)
+                                ->orderBy('category_id', 'DESC')
+                                ->orderBy('name', 'ASC')
+                                ->get();
         }
 
         return view('productos', compact('productos'));

@@ -29,7 +29,9 @@ class CategoryController extends Controller
 
     public function show(string $categoria): View
     {
-        $categorias = Category::where('name', 'like', "%{$categoria}%")->get();
+        $categorias = Category::where('name', 'like', "%{$categoria}%")
+                                ->orderBy('name', 'ASC')
+                                ->get();
 
         return view('categorias', compact('categorias'));
     }
