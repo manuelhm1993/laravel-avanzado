@@ -11,9 +11,9 @@ class HomeController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request): View
+    public function __invoke(): View
     {
-        $categorias = Category::all();
+        $categorias = Category::orderBy('name', 'ASC')->get();
 
         return view('home', compact('categorias'));
     }

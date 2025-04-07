@@ -27,9 +27,7 @@ class ProductController extends Controller
         $product->category_id = $category->id;
         $product->save();
 
-        $productos = Product::all();
-
-        return redirect()->route('productos.index', compact('productos'));
+        return redirect()->route('productos.index');
     }
 
     public function show(string $categoria)//: View

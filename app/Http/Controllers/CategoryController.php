@@ -22,9 +22,7 @@ class CategoryController extends Controller
         $category->name = $nombreCategoria;
         $category->save();
 
-        $categorias = Category::all();
-
-        return redirect()->route('home', compact('categorias'));
+        return redirect()->route('categorias.index');
     }
 
     public function show(string $categoria): View
