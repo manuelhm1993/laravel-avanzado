@@ -5,7 +5,7 @@
 
     <div class="container">
         <div class="row">
-            @foreach ($categorias as $categoria)
+            @forelse ($categorias as $categoria)
             <div class="col-12 col-sm-3 mb-2">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -15,7 +15,11 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="alert alert-danger" role="alert">
+                La categoría no existe
+            </div>
+            @endforelse
         </div>
     </div>
 @endsection

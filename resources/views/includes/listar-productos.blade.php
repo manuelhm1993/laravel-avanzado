@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        @foreach ($productos as $producto)
+        @forelse ($productos as $producto)
         <div class="col-12 col-sm-3 mb-2">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -11,6 +11,10 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+            <div class="alert alert-danger" role="alert">
+                Sin existencia
+            </div>
+        @endforelse
     </div>
 </div>
