@@ -4,10 +4,6 @@
     @foreach ($categorias as $categoria)
         <h2>{{ $categoria->name }}</h2>
 
-        @php
-            $productos = $categoria->products;
-        @endphp
-
-        @include('includes.listar-productos')
+        @include('includes.listar-productos', ['productos' => $categoria->products])
     @endforeach
 @endsection
