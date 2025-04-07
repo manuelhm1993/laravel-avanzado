@@ -19,6 +19,9 @@ Route::prefix('categorias')->name('categorias.')->controller(CategoryController:
 });
 
 Route::prefix('productos')->name('productos.')->controller(ProductController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+    
+    Route::get('/create/{nombreProducto}/{category}', 'create')->name('create');
     //Definición de parámetro nulo
-    Route::get('/{categoria?}', 'index')->name('index');
+    Route::get('/{categoria?}', 'show')->name('show');
 });

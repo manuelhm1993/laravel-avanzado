@@ -16,7 +16,7 @@ class CategoryController extends Controller
         return view('categorias', compact('categorias'));
     }
 
-    public function create($nombreCategoria): RedirectResponse
+    public function create(string $nombreCategoria): RedirectResponse
     {
         $category = new Category();
         $category->name = $nombreCategoria;
@@ -27,7 +27,7 @@ class CategoryController extends Controller
         return redirect()->route('home', compact('categorias'));
     }
 
-    public function show($categoria): View
+    public function show(string $categoria): View
     {
         $categorias = Category::where('name', 'like', "%{$categoria}%")->get();
 
