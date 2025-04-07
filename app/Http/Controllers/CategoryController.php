@@ -12,7 +12,6 @@ class CategoryController extends Controller
     public function index(): View
     {
         $categorias = Category::orderBy('name', 'ASC')->get();
-
         return view('categorias', compact('categorias'));
     }
 
@@ -21,7 +20,6 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $nombreCategoria;
         $category->save();
-
         return redirect()->route('categorias.index');
     }
 
@@ -30,7 +28,6 @@ class CategoryController extends Controller
         $categorias = Category::where('name', 'like', "%{$categoria}%")
                                 ->orderBy('name', 'ASC')
                                 ->get();
-
         return view('categorias', compact('categorias'));
     }
 }

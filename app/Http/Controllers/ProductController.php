@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Utilities\Common;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,11 +13,7 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $productos = Product::with('category')
-                        ->orderBy('category_id', 'DESC')
-                        ->orderBy('name', 'ASC')
-                        ->get();
-        
+        $productos = Common::listarProductos();
         return view('productos', compact('productos'));
     }
 
@@ -30,19 +27,9 @@ class ProductController extends Controller
         return redirect()->route('productos.index');
     }
 
-    public function show(string $categoria)//: View
+    public function show(string $categoria): View
     {
-        $category = Category::where('name', 'like', "%{$categoria}%")->first();
-        $productos = [];
-
-        if(!is_null($category))
-        {
-            $productos = Product::where('category_id', $category->id)
-                                ->orderBy('category_id', 'DESC')
-                                ->orderBy('name', 'ASC')
-                                ->get();
-        }
-
+        $productos = Common::listarProductosCategoria($categoria);
         return view('productos', compact('productos'));
     }
 }

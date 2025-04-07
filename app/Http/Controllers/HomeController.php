@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Utilities\Common;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -14,11 +13,8 @@ class HomeController extends Controller
      */
     public function __invoke(): View
     {
-        $categorias = Category::orderBy('name', 'ASC')->get();
-        $productos = Product::with('category')
-                            ->orderBy('category_id', 'DESC')
-                            ->orderBy('name', 'ASC')
-                            ->get();
+        $categorias = Common::listarCategorias();
+        $productos = Common::listarProductos();
 
         return view('home', compact('categorias', 'productos'));
     }
