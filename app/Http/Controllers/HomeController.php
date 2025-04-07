@@ -13,9 +13,7 @@ class HomeController extends Controller
      */
     public function __invoke(): View
     {
-        $categorias = Common::listarCategorias();
-        $productos = Common::listarProductos();
-
-        return view('home', compact('categorias', 'productos'));
+        $categorias = Common::listarCategorias(true);
+        return view('home', compact('categorias'));
     }
 }

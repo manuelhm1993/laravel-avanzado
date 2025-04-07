@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Utilities\Common;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(): View
     {
-        $categorias = Category::orderBy('name', 'ASC')->get();
+        $categorias = Common::listarCategorias(true);
         return view('categorias', compact('categorias'));
     }
 
@@ -25,9 +26,7 @@ class CategoryController extends Controller
 
     public function show(string $categoria): View
     {
-        $categorias = Category::where('name', 'like', "%{$categoria}%")
-                                ->orderBy('name', 'ASC')
-                                ->get();
+        $categorias = Common::getCategoria($categoria);
         return view('categorias', compact('categorias'));
     }
 }

@@ -8,18 +8,29 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Common
 {
-    public static function listarCategorias(): Collection
+    public static function listarCategorias(bool $products = false): Collection
     {
-        $categorias = Category::orderBy('name', 'ASC')->get();
+        $categorias = ($products) ? Category::with('products')->orderBy('name', 'ASC')->get() : Category::orderBy('name', 'ASC')->get();
         return $categorias;
     }
 
-    public static function listarProductos(): Collection
+    public static function listarProductos(bool $category = true): Collection | array
     {
-        $productos = Product::with('category')
+        $productos = [];
+
+        if($category)
+        {
+            $productos = Product::with('category')
                             ->orderBy('category_id', 'DESC')
                             ->orderBy('name', 'ASC')
                             ->get();
+        }
+        else
+        {
+            $productos = Product::orderBy('category_id', 'DESC')
+                            ->orderBy('name', 'ASC')
+                            ->get();
+        }
         return $productos;
     }
 
@@ -36,5 +47,13 @@ class Common
                                 ->get();
         }
         return $productos;
+    }
+
+    public static function getCategoria(string $categoria): Collection
+    {
+        $categorias = Category::where('name', 'like', "%{$categoria}%")
+                                ->orderBy('name', 'ASC')
+                                ->get();
+        return $categorias;
     }
 }

@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $productos = Common::listarProductos();
+        $productos = Common::listarProductos(true);
         return view('productos', compact('productos'));
     }
 
