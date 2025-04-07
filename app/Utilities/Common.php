@@ -4,7 +4,7 @@ namespace App\Utilities;
 
 class Common
 {
-    public static function createFlash(): null
+    public static function listarCategorias()
     {
         return null;
     }
