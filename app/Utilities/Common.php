@@ -2,55 +2,58 @@
 
 namespace App\Utilities;
 
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
+
 class Common
 {
-    private static array $categorias = [
-        'Verduras' => [
-            'Tomates',
-            'Lechuga',
-            'Cebolla',
-        ],
-        'Fideos' => [
-            'Tallarines',
-            'Cabello de ángel',
-            'Vermicelli',
-        ],
-    ];
-
-    public static function getProductos(?string $nombreCategoria = null): array
+    public static function listarCategorias(bool $products = false): Collection
     {
-        $response = [];
+        $categorias = ($products) ? Category::with('products')->orderBy('name', 'ASC')->get() : Category::orderBy('name', 'ASC')->get();
+        return $categorias;
+    }
 
-        if(!is_null($nombreCategoria) && array_key_exists($nombreCategoria, self::$categorias))
+    public static function listarProductos(bool $category = true): Collection | array
+    {
+        $productos = [];
+
+        if($category)
         {
-            foreach(self::$categorias[$nombreCategoria] as $categoria)
-            {
-                $response[] = $categoria;
-            }
+            $productos = Product::with('category')
+                            ->orderBy('category_id', 'DESC')
+                            ->orderBy('name', 'ASC')
+                            ->get();
         }
         else
         {
-            foreach(self::$categorias as $categoria)
-            {
-                foreach ($categoria as $producto) 
-                {
-                    $response[] = $producto;
-                }
-            }
+            $productos = Product::orderBy('category_id', 'DESC')
+                            ->orderBy('name', 'ASC')
+                            ->get();
         }
-    
-        return $response;
+        return $productos;
     }
 
-    public static function getCategorias(): array
+    public static function listarProductosCategoria(string $categoria): Collection | array
     {
-        $dataCategorias = [];
-    
-        foreach(self::$categorias as $key => $categoria)
+        $category = Category::where('name', 'like', "%{$categoria}%")->first();
+        $productos = [];
+
+        if(!is_null($category))
         {
-            $dataCategorias[] = $key;
+            $productos = Product::where('category_id', $category->id)
+                                ->orderBy('category_id', 'DESC')
+                                ->orderBy('name', 'ASC')
+                                ->get();
         }
-    
-        return $dataCategorias;
+        return $productos;
+    }
+
+    public static function getCategoria(string $categoria): Collection
+    {
+        $categorias = Category::where('name', 'like', "%{$categoria}%")
+                                ->orderBy('name', 'ASC')
+                                ->get();
+        return $categorias;
     }
 }

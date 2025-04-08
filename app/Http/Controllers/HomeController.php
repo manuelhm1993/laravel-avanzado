@@ -11,11 +11,9 @@ class HomeController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request): View
+    public function __invoke(): View
     {
-        $categorias = Common::getCategorias();
-        $productos = Common::getProductos();
-
-        return view('home', compact('productos', 'categorias'));
+        $categorias = Common::listarCategorias(true);
+        return view('home', compact('categorias'));
     }
 }
