@@ -21,6 +21,8 @@
 @section('content')
     <h2>Crear categoría</h2>
 
+    @include('includes.admin.display-validation-errors')
+
     <div class="row">
         <div class="col-12">
             <div class="card">
