@@ -8,9 +8,17 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Common
 {
-    public static function listarCategorias(bool $products = false): Collection
+    public static function listarCategorias(bool $products = false, array $order = ['field' => 'name', 'order' => 'ASC']): Collection | array
     {
-        $categorias = ($products) ? Category::with('products')->orderBy('name', 'ASC')->get() : Category::orderBy('name', 'ASC')->get();
+        $categorias = [];
+        if($products)
+        {
+            $categorias = Category::with('products')->orderBy($order['field'], $order['order'])->get();
+        }
+        else
+        {
+            $categorias = Category::orderBy($order['field'], $order['order'])->get();
+        }
         return $categorias;
     }
 

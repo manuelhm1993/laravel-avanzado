@@ -38,11 +38,13 @@
 
 <body class="app aside-menu-fixed sidebar-lg-show">
     <header class="app-header bg-light border-0 navbar">
-        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto ml-3" type="button"
-            data-toggle="sidebar-show"><span class="navbar-toggler-icon"></span></button><a class="navbar-brand"
-            href="{{ route('admin.dashboard') }}"><b>Laravel</b> - <span>avanzado</span></a>
-        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show"><span
-                class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto ml-3" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ route('admin.dashboard') }}"><b>Laravel</b> - <span>avanzado</span></a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            {{-- <span class="navbar-toggler-icon"></span> --}}
+        </button>
         <ul class="nav navbar-nav d-md-down-none">
             <li class="nav-item px-3"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li class="nav-item px-3"><a class="nav-link" href="#">Users</a></li>

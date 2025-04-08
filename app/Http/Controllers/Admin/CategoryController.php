@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Utilities\Common;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +14,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categorias.index');
+        $order = [
+            'field' => 'id',
+            'order' => 'DESC',
+        ];
+        $categorias = Common::listarCategorias(order:$order);
+
+        return view('admin.categorias.index', compact('categorias'));
     }
 
     /**
