@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Utilities\Common;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -27,9 +28,9 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.categorias.create');
     }
 
     /**
@@ -37,7 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**
@@ -51,9 +52,9 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $categoria)
+    public function edit(Category $categoria): View
     {
-        return $categoria;
+        return view('admin.categorias.edit', compact('categoria'));
     }
 
     /**
@@ -61,14 +62,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $categoria)
     {
-        //
+        return $request->all();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $categoria)
+    public function destroy(Category $categoria): RedirectResponse
     {
-        //
+        $categoria->delete();
+        return to_route('admin.categorias.index');
     }
 }

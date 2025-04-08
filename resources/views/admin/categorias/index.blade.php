@@ -36,8 +36,13 @@
                 <td>{{ $categoria->id }}</td>
                 <td>{{ $categoria->name }}</td>
                 {{-- <td>{{ $categoria->created_at->format('Y-m-d - h:m:s:a') }}</td> --}}
-                <td style="width: 100px;">
+                <td style="width: 180px;">
                     <a class="btn btn-sm btn-info" href="{{ route('admin.categorias.edit', $categoria) }}">Editar</a>
+                    <form action="{{ route('admin.categorias.destroy', $categoria) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-sm btn-danger" value="Eliminar">
+                    </form>
                 </td>
             </tr>
             @endforeach

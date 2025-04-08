@@ -21,11 +21,13 @@
                     <i class="nav-icon la la-lg la-plus"></i> Crear
                 </a>
             </li>
+            @if (request()->routeIs('admin.categorias.edit'))
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.categorias.create') }}">
+                <a class="nav-link" href="{{ route('admin.categorias.edit', $categoria) }}">
                     <i class="nav-icon la la-lg la-edit"></i> Editar
                 </a>
             </li>
+            @endif
         </ul>
     </li>
 </ul>
