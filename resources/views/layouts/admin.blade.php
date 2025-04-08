@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!--
     * Backstrap - Free Bootstrap Admin Template
@@ -17,26 +18,33 @@
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard,CoreUI">
     <title>BackStrap - Free Bootstrap 4 Admin Template</title>
     <!-- Icons-->
-    <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-    <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-    <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet"
+        integrity="sha384-PDUiPu3vDllMfrUHnurV430Qg8chPZTNhY8RUpq89lq22R3PzypXQifBpcpE1eoB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css"
+        integrity="sha512-QKC1UZ/ZHNgFzVKSAhV5v5j73eeL9EEN289eKAEFaAjgAiobVAnVv/AGuPbXsKl1dNoel3kNr6PYnSiTzVVBCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet"> --}}
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
         rel="stylesheet">
     <!-- Main styles for this application-->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/css/pace.min.css') }}" rel="stylesheet">
 </head>
+
 <body class="app aside-menu-fixed sidebar-lg-show">
     <header class="app-header bg-light border-0 navbar">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto ml-3" type="button"
             data-toggle="sidebar-show"><span class="navbar-toggler-icon"></span></button><a class="navbar-brand"
-            href="#"><b>Back</b><span>strap</span></a>
+            href="{{ route('admin.dashboard') }}"><b>Laravel</b> - <span>avanzado</span></a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show"><span
                 class="navbar-toggler-icon"></span></button>
         <ul class="nav navbar-nav d-md-down-none">
-            <li class="nav-item px-3"><a class="nav-link" href="#">Dashboard</a></li>
+            <li class="nav-item px-3"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li class="nav-item px-3"><a class="nav-link" href="#">Users</a></li>
             <li class="nav-item px-3"><a class="nav-link" href="#">Settings</a></li>
         </ul>
@@ -58,11 +66,11 @@
                             class="badge badge-danger">42</span></a><a class="dropdown-item" href="#"><i
                             class="fa fa-comments"></i> Comments<span class="badge badge-warning">42</span></a>
                     <div class="dropdown-header text-center"><strong>Settings</strong></div><a class="dropdown-item"
-                        href="#"><i class="fa fa-user"></i> Profile</a><a class="dropdown-item" href="#"><i
-                            class="fa fa-wrench"></i> Settings</a><a class="dropdown-item" href="#"><i
-                            class="fa fa-usd"></i> Payments<span class="badge badge-secondary">42</span></a><a
-                        class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span
-                            class="badge badge-primary">42</span></a>
+                        href="#"><i class="fa fa-user"></i> Profile</a><a class="dropdown-item"
+                        href="#"><i class="fa fa-wrench"></i> Settings</a><a class="dropdown-item"
+                        href="#"><i class="fa fa-usd"></i> Payments<span
+                            class="badge badge-secondary">42</span></a><a class="dropdown-item" href="#"><i
+                            class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
                             class="fa fa-shield"></i> Lock Account</a><a class="dropdown-item" href="#"><i
                             class="fa fa-lock"></i> Logout</a>
@@ -77,110 +85,7 @@
     <div class="app-body">
         <div class="sidebar sidebar-pills bg-transparent">
             <nav class="sidebar-nav">
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i
-                                class="nav-icon la la-lg la-dashboard"></i> Dashboard</a></li>
-                    <li class="nav-title">Theme</li>
-                    <li class="nav-item"><a class="nav-link" href="colors.html"><i
-                                class="nav-icon la la-lg la-bullseye"></i> Colors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="typography.html"><i
-                                class="nav-icon la la-lg la-pencil"></i> Typography</a></li>
-                    <li class="nav-title">Components</li>
-                    <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i
-                                class="nav-icon la la-lg la-bank"></i> Base</a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item"><a class="nav-link" href="base/breadcrumb.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Breadcrumb</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/cards.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Cards</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/carousel.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Carousel</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/collapse.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Collapse</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/forms.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Forms</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/jumbotron.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Jumbotron</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/list-group.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> List group</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/navs.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Navs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/pagination.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Pagination</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/popovers.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Popovers</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/progress.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Progress</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/scrollspy.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Scrollspy</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/switches.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Switches</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/tables.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Tables</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/tabs.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Tabs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="base/tooltips.html"><i
-                                        class="nav-icon la la-lg la-puzzle"></i> Tooltips</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i
-                                class="nav-icon la la-lg la-hand-pointer-o"></i> Buttons</a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item"><a class="nav-link" href="buttons/buttons.html"><i
-                                        class="nav-icon la la-lg la-cursor"></i> Buttons</a></li>
-                            <li class="nav-item"><a class="nav-link" href="buttons/button-group.html"><i
-                                        class="nav-icon la la-lg la-cursor"></i> Buttons Group</a></li>
-                            <li class="nav-item"><a class="nav-link" href="buttons/dropdowns.html"><i
-                                        class="nav-icon la la-lg la-cursor"></i> Dropdowns</a></li>
-                            <li class="nav-item"><a class="nav-link" href="buttons/brand-buttons.html"><i
-                                        class="nav-icon la la-lg la-cursor"></i> Brand Buttons</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="charts.html"><i
-                                class="nav-icon la la-lg la-pie-chart"></i> Charts</a></li>
-                    <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i
-                                class="nav-icon la la-lg la-star"></i> Icons</a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item"><a class="nav-link" href="icons/line-awesome.html"> Line
-                                    Awesome<span class="badge badge-primary">NEW</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="icons/coreui-icons.html"> CoreUI Icons</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="icons/flags.html"> Flags</a></li>
-                            <li class="nav-item"><a class="nav-link" href="icons/font-awesome.html"> Font Awesome</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="icons/simple-line-icons.html"> Simple Line
-                                    Icons</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i
-                                class="nav-icon la la-lg la-bell"></i> Notifications</a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item"><a class="nav-link" href="notifications/alerts.html"><i
-                                        class="nav-icon la la-lg la-bell"></i> Alerts</a></li>
-                            <li class="nav-item"><a class="nav-link" href="notifications/badge.html"><i
-                                        class="nav-icon la la-lg la-bell"></i> Badge</a></li>
-                            <li class="nav-item"><a class="nav-link" href="notifications/modals.html"><i
-                                        class="nav-icon la la-lg la-bell"></i> Modals</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="widgets.html"><i
-                                class="nav-icon la la-lg la-calculator"></i> Widgets</a></li>
-                    <li class="divider"></li>
-                    <li class="nav-title">Extras</li>
-                    <li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i
-                                class="nav-icon la la-lg la-file"></i> Pages</a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item"><a class="nav-link" href="login.html" target="_top"><i
-                                        class="nav-icon la la-lg la-star"></i> Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="register.html" target="_top"><i
-                                        class="nav-icon la la-lg la-star"></i> Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="404.html" target="_top"><i
-                                        class="nav-icon la la-lg la-star"></i> Error 404</a></li>
-                            <li class="nav-item"><a class="nav-link" href="500.html" target="_top"><i
-                                        class="nav-icon la la-lg la-star"></i> Error 500</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                @include('includes.admin.menu')
             </nav>
         </div>
         <main class="main">
@@ -416,12 +321,12 @@
                 href="https://backpackforlaravel.com">Backpack for Laravel</a></div>
     </footer>
     <!-- CoreUI and necessary plugins-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/pace-progress/pace.min.js"></script>
-    <script src="node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="node_modules/@coreui/coreui/dist/js/coreui.min.js"></script>
+    <script src="{{ asset('assets/admin/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/coreui.min.js') }}"></script>
     <script src="node_modules/pnotify/dist/iife/Pnotify.js"></script>
     <script src="node_modules/pnotify/dist/iife/PnotifyButtons.js"></script>
     <script src="node_modules/pnotify/dist/iife/PnotifyConfirm.js"></script>
@@ -431,4 +336,5 @@
         PNotify.defaults.styling = 'bootstrap4';
     </script>
 </body>
+
 </html>
