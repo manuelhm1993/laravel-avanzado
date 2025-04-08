@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return 'Prueba rutas admin';
-})->name('dashboard');
+Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
