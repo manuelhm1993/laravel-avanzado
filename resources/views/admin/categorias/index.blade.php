@@ -21,30 +21,26 @@
 @section('content')
     <h2>Lista de categorías</h2>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-responsive-sm table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Fecha de creación</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($categorias as $categoria)
-                        <tr>
-                            <td>{{ $categoria->id }}</td>
-                            <td>{{ $categoria->name }}</td>
-                            <td>{{ $categoria->created_at->format('Y-m-d - h:m:s:a') }}</td>
-                            <td><span class="badge badge-success">Active</span></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    <table class="table table-responsive-sm table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                {{-- <th>Fecha de creación</th> --}}
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($categorias as $categoria)
+            <tr>
+                <td>{{ $categoria->id }}</td>
+                <td>{{ $categoria->name }}</td>
+                {{-- <td>{{ $categoria->created_at->format('Y-m-d - h:m:s:a') }}</td> --}}
+                <td style="width: 100px;">
+                    <a class="btn btn-sm btn-info" href="{{ route('admin.categorias.edit', $categoria) }}">Editar</a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 @endsection
