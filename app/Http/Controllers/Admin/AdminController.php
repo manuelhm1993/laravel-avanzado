@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function dashboard(): View
+    public function __invoke(): View
     {
         return view('admin.dashboard');
     }
