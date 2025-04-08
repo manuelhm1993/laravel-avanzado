@@ -11,10 +11,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $productos = Common::listarProductos(true);
-        return view('productos', compact('productos'));
+        $categoria = $request->query('categoria');
+        $productos = (!is_null($categoria)) ? Common::listarProductosCategoria($categoria) : Common::listarProductos(true);
+
+        return view('productos.index', compact('productos'));
     }
 
     public function create(string $nombreProducto, Category $category): RedirectResponse
@@ -27,9 +29,8 @@ class ProductController extends Controller
         return redirect()->route('productos.index');
     }
 
-    public function show(string $categoria): View
+    public function show(Product $producto): View
     {
-        $productos = Common::listarProductosCategoria($categoria);
-        return view('productos', compact('productos'));
+        return view('productos.show', compact('producto'));
     }
 }

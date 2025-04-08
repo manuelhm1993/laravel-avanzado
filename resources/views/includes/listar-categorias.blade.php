@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $categoria->name }}</h5>
                     <p class="card-text">Cantidad de productos: {{ (!is_null($categoria->products)) ? $categoria->products->count() : 0 }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{{ route('productos.index', ['categoria' => $categoria->name]) }}" class="btn btn-primary">Ver productos</a>
                 </div>
             </div>
         </div>

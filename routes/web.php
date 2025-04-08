@@ -23,5 +23,5 @@ Route::prefix('productos')->name('productos.')->controller(ProductController::cl
     
     Route::get('/create/{nombreProducto}/{category}', 'create')->name('create');
     //Definición de parámetro nulo
-    Route::get('/{categoria?}', 'show')->name('show');
+    Route::get('/{producto}', 'show')->name('show');
 });
