@@ -16,14 +16,6 @@ class CategoryController extends Controller
         return view('categorias', compact('categorias'));
     }
 
-    public function create(string $nombreCategoria): RedirectResponse
-    {
-        $category = new Category();
-        $category->name = $nombreCategoria;
-        $category->save();
-        return redirect()->route('categorias.index');
-    }
-
     public function show(string $categoria): View
     {
         $categorias = Common::getCategoria($categoria);

@@ -90,22 +90,12 @@
         </div>
         <main class="main">
             <!-- Breadcrumb-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-                <!-- Breadcrumb Menu-->
-                <li class="breadcrumb-menu d-md-down-none">
-                    <div class="btn-group" role="group" aria-label="Button group">
-                        <a class="btn" href="#">
-                            <i class="icon-speech"></i>
-                        </a>
-                        <a class="btn" href="./"><i class="icon-graph"></i>  Dashboard</a>
-                        <a class="btn" href="#"><i class="icon-settings"></i>  Settings</a>
-                    </div>
-                </li>
-            </ol>
+            @yield('breadcrumb')
             <div class="container-fluid">
-                <div class="animated fadeIn"></div>
+                <div class="animated fadeIn">
+                    {{-- Main content --}}
+                    @yield('content')
+                </div>
             </div>
         </main>
         <aside class="aside-menu">
@@ -329,14 +319,13 @@
     <script src="{{ asset('assets/admin/js/pace.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/coreui.min.js') }}"></script>
-    <script src="node_modules/pnotify/dist/iife/Pnotify.js"></script>
-    <script src="node_modules/pnotify/dist/iife/PnotifyButtons.js"></script>
-    <script src="node_modules/pnotify/dist/iife/PnotifyConfirm.js"></script>
-    <script src="node_modules/pnotify/dist/iife/PnotifyMobile.js"></script>
-    <script src="node_modules/pnotify/dist/iife/PnotifyNonBlock.js"></script>
+    <script src="{{ asset('assets/admin/js/Pnotify.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/PnotifyButtons.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/PnotifyConfirm.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/PnotifyMobile.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/PnotifyNonBlock.js') }}"></script>
     <script>
         PNotify.defaults.styling = 'bootstrap4';
     </script>
 </body>
-
 </html>
