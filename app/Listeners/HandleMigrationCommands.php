@@ -14,7 +14,13 @@ class HandleMigrationCommands
      */
     public function __construct()
     {
-        //
+        /**
+         * 1. Crear el listener: php artisan make:listener HandleMigrationCommands
+         * 2. Escribir su lógica: esta es la clase y todo lo maneja handle, cambiar la ruta de la carpeta img según sea el caso
+         * 3. Limpiar la cache: php artisan event:cache && php artisan event:clear
+         * 4. Ejecutar autoload: composer dump-autoload
+         * 5. Esta es la solución para el TODO: del commit b65738b del proyecto MHenriquezCA/blog
+         */
     }
 
     /**
