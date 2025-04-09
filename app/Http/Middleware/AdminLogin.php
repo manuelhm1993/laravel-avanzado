@@ -17,7 +17,7 @@ class AdminLogin
      */
     public function handle(Request $request, Closure $next): Response | RedirectResponse
     {
-        $response = (Auth::check()) ? $next($request) : to_route('categorias.index');
+        $response = (Auth::check()) ? $next($request) : to_route('admin.login.in');
 
         return $response;
     }

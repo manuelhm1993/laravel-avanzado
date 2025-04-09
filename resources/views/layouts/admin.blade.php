@@ -34,6 +34,8 @@
     <!-- Main styles for this application-->
     <link href="{{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/admin/css/pace.min.css') }}" rel="stylesheet">
+
+    @stack('css')
 </head>
 
 <body class="app aside-menu-fixed sidebar-lg-show">
@@ -329,5 +331,7 @@
     <script>
         PNotify.defaults.styling = 'bootstrap4';
     </script>
+
+    @stack('js')
 </body>
 </html>
