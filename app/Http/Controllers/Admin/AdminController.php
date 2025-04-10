@@ -22,13 +22,10 @@ class AdminController extends Controller
 
     public function logear(Request $request): RedirectResponse
     {
-        $data = [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ];
+        $credentials = $request->only(['email', 'password']);
 
         // Intenta hacer login con los datos recibidos y ya verifica el hash
-        if(Auth::attempt($data))
+        if(Auth::attempt($credentials))
         {
             return to_route('admin.dashboard');
         }
@@ -36,5 +33,12 @@ class AdminController extends Controller
         {
             return back()->with('error', 'Datos incorrectos');
         }
+    }
+
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+
+        return to_route('home');
     }
 }
