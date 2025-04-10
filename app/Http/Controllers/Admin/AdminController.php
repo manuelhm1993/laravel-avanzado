@@ -27,8 +27,8 @@ class AdminController extends Controller
 
         // Intenta hacer login con los datos recibidos y ya verifica el hash
         if (Auth::attempt($credentials)) {
-            // Comprobar si la request es de tipo ajax
-            if ($request->ajax()) {
+            // Comprobar si la request espera un json, esto sustituye a ajax()
+            if ($request->expectsJson()) {
                 return response()->json([
                     'success' => true,
                     'redirect' => route('admin.dashboard'),
@@ -37,8 +37,13 @@ class AdminController extends Controller
 
             return to_route('admin.dashboard');
         }
-        return response()->json(['success' => false], 401);
-        //return response()->json(['success' => false], 401);
+
+        // Comprobar si la request espera un json, esto sustituye a ajax()
+        if ($request->expectsJson()) {
+            return response()->json(['success' => false]);
+        }
+        
+        return back()->with('error', 'Error al hacer login');
     }
 
     public function logout(): RedirectResponse
