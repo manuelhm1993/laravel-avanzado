@@ -34,6 +34,8 @@
     <!-- Main styles for this application-->
     <link href="{{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/admin/css/pace.min.css') }}" rel="stylesheet">
+
+    @stack('css')
 </head>
 
 <body class="app aside-menu-fixed sidebar-lg-show">
@@ -47,8 +49,7 @@
         </button>
         <ul class="nav navbar-nav d-md-down-none">
             <li class="nav-item px-3"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="nav-item px-3"><a class="nav-link" href="#">Users</a></li>
-            <li class="nav-item px-3"><a class="nav-link" href="#">Settings</a></li>
+            <li class="nav-item px-3"><a class="nav-link" href="{{ route('admin.logout') }}">Logout</a></li>
         </ul>
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item d-md-down-none"><a class="nav-link" href="#"><i class="icon-bell"></i><span
@@ -329,5 +330,7 @@
     <script>
         PNotify.defaults.styling = 'bootstrap4';
     </script>
+
+    @stack('js')
 </body>
 </html>
