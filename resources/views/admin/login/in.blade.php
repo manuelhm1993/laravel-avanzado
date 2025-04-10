@@ -8,26 +8,23 @@
                     <div class="card p-4">
                         <div class="card-body">
                             <p class="text-muted">Formulario de login</p>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-user"></i></span>
+                            <form action="{{ route('admin.logear') }}" method="post" id="form-login">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="email" name="email" id="email" placeholder="Ingrese su correo">
                                 </div>
-                                <input class="form-control" type="email" name="email" placeholder="Ingrese su correo">
-                            </div>
-                            <div class="input-group mb-4">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                <div class="input-group mb-4">
+                                    <input class="form-control" type="password" name="password" id="password" placeholder="Ingrese su contraseña">
                                 </div>
-                                <input class="form-control" type="password" name="password" placeholder="Ingrese su contraseña">
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <button class="btn btn-primary px-4" id="login" type="button">Login</button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary px-4" id="login" type="submit">Login</button>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button class="btn btn-link px-0" id="forgot" type="button">¿Olvidó su contraseña?</button>
+                                    </div>
                                 </div>
-                                <div class="col-6 text-right">
-                                    <button class="btn btn-link px-0" id="forgot" type="button">¿Olvidó su contraseña?</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     
@@ -45,28 +42,3 @@
         </div>
     </div>
 @endsection
-
-@push('js')
-    <script>
-        const redireccionarPagina = (route) => {
-            window.location = route;
-        };
-
-        document.addEventListener('click', (e) => {
-            const target = e.target;
-
-            if(target.id)
-            {
-                switch(target.id) {
-                    case 'register':
-                        break;
-                    case 'login':
-                        redireccionarPagina("{{ route('home') }}");
-                        break;
-                    case 'forgot':
-                        break;                        
-                }
-            }
-        });
-    </script>
-@endpush
