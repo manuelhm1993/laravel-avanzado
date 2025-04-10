@@ -37,4 +37,11 @@ class AdminController extends Controller
             return back()->with('error', 'Datos incorrectos');
         }
     }
+
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+
+        return to_route('home');
+    }
 }
