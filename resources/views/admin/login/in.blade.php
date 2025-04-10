@@ -1,3 +1,8 @@
+@auth
+    {{-- Si el usuario está logeado, no se le mostrará el login, se redigirá al dashboard --}}
+    <script> window.location.href="{{ route('admin.dashboard') }}"; </script>
+@endauth
+
 @extends('layouts.app')
 
 @section('content')
