@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,22 +21,24 @@ class AdminController extends Controller
         return view('admin.login.in');
     }
 
-    public function logear(Request $request): RedirectResponse
+    public function logear(Request $request): RedirectResponse | JsonResponse
     {
-        $data = [
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ];
+        $credentials = $request->only('email', 'password');
 
         // Intenta hacer login con los datos recibidos y ya verifica el hash
-        if(Auth::attempt($data))
-        {
+        if (Auth::attempt($credentials)) {
+            // Comprobar si la request es de tipo ajax
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'redirect' => route('admin.dashboard'),
+                ]);
+            }
+
             return to_route('admin.dashboard');
         }
-        else
-        {
-            return back()->with('error', 'Datos incorrectos');
-        }
+        return response()->json(['success' => false], 401);
+        //return response()->json(['success' => false], 401);
     }
 
     public function logout(): RedirectResponse
