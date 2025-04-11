@@ -74,32 +74,48 @@
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
+        const validateLogin = (e) => {
             const loginForm = document.querySelectorAll('input');
             const data = {};
 
+            if(e.target.id == 'login')
+            {
+                loginForm.forEach(element => {
+                    data[element.name] = element.value;
+
+                    if(element.name != '_token') element.value = '';
+                });
+
+                const parameters = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': data._token,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+
+                const url = "{{ route('admin.logear') }}";
+
+                login(url, parameters);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
             document.addEventListener('click', (e) => {
-                if(e.target.id == 'login')
+                validateLogin(e);
+            });
+
+            document.addEventListener('keyup', (e) => {
+                if(e.keyCode == 13)
                 {
-                    loginForm.forEach(element => {
-                        data[element.name] = element.value;
+                    const hasFocus = document.activeElement;
 
-                        if(element.name != '_token') element.value = '';
-                    });
-
-                    const parameters = {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': data._token,
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    };
-
-                    const url = "{{ route('admin.logear') }}";
-
-                    login(url, parameters);
+                    if(hasFocus.id == 'email' || hasFocus.id == 'password')
+                    {
+                        document.querySelector('#login').click();
+                    }
                 }
             });
         });
